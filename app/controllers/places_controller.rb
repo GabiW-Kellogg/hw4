@@ -10,13 +10,21 @@ class PlacesController < ApplicationController
   end
 
   def new
+    if session["user_id"] == nil
+      flash["notice"] = "You must login first."
+      redirect_to "/login"
+    end
   end
 
   def create
-    @place = Place.new
-    @place["name"] = params["name"]
-    @place.save
-    redirect_to "/places"
+    if session["user_id"] == nil
+      flash["notice"] = "You must login first."
+      redirect_to "/login"
+    else
+      @place = Place.new
+      @place["name"] = params["name"]
+      @place.save
+      redirect_to "/places"
   end
 
 end
