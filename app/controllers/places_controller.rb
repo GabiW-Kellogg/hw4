@@ -25,6 +25,7 @@ class PlacesController < ApplicationController
       @place["name"] = params["name"]
       @place.save
       redirect_to "/places"
+    end
   end
 
 end
